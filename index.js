@@ -21,4 +21,4 @@ app.use('/users', userRoutes)
 app.use('/products', productRoutes)
 
 
-app.listen(5000)
+app.listen(process.env.PORT || 5000)
