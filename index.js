@@ -7,8 +7,8 @@ const app = express()
 
 app.use(express.json())
 
-//solve cors
-app.use(cors())
+//Resolver cors
+app.use(cors({}))
 
 //Ponte para imgs
 app.use(express.static('public'))

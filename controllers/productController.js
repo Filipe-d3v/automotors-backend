@@ -64,10 +64,10 @@ module.exports = class productController {
             res.status(422).json({ message: 'É necessário pelo menos uma imagem para o produto!' })
             return
         }
-        //get product owner 
+        
         const token = getToken(req)
         const user = await getUserByToken(token)
-        // get product
+        
         const product = new Product({
             name,
             description,

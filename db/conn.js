@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 async function main() {
     await mongoose.connect('mongodb+srv://Filipe:4kCJBCWPyfb9h88@nodecluster.w1df6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-    console.log('Conectado ao mongoose!')
+    console.log('Conectado ao Banco!')
 }
 main().catch(err => console.log(err))
 

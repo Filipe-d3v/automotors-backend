@@ -9,8 +9,6 @@ const createUserToken = require('../helpers/create-users-tokens')
 const getToken = require('../helpers/get-token')
 const getUserByToken = require('../helpers/get-user-by-token')
 
-const mongoose = require('mongoose')
-
 module.exports = class userController {
     static async register(req, res) {
 
@@ -78,14 +76,14 @@ module.exports = class userController {
             res.status(422).json({ message: 'A senha é obrigatória!' })
             return
         }
-        //check user exists
+        //checar se usuário existe
         const user = await User.findOne({ email: email })
 
         if (!user) {
-            res.status(422).json({ message: 'Não existe um usuário com este email!' })
+            res.status(422).json({ message: 'Não existe um usuário com este e-mail!' })
             return
         }
-        //check if password is match with db password
+        //checar se a senha é a mesma do banco
         const checkPassword = await bcrypt.compare(passwd, user.passwd)
 
         if (!checkPassword) {
