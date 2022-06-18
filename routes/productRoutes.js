@@ -13,7 +13,5 @@ router.get('/myShopping', verifyToken, productController.getAllUserShopping)
 router.get('/:id', productController.getProductById)
 router.delete('/:id', verifyToken, productController.removeProductById)
 router.patch('/:id', verifyToken, imageUpload.array('images'), productController.updateProduct)
-router.patch('/reserve/:id', verifyToken, productController.reserve)
-router.patch('/sold/:id', verifyToken, productController.finishSold) 
 
 module.exports = router 

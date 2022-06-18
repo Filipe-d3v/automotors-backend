@@ -283,70 +283,70 @@ module.exports = class productController {
         res.status(200).json({message: 'Prduto atualizado!'})
     }
 
-    static async reserve(req, res) {
-        const id = req.params.id
+    // static async reserve(req, res) {
+    //     const id = req.params.id
 
-        // Check if exists 
-        const product = await Product.findOne({ _id: id })
+    //     // Check if exists 
+    //     const product = await Product.findOne({ _id: id })
 
-        if (!product) {
-            res.status(404).json({ message: 'Produto não encontrado!' })
-            return
-        }
+    //     if (!product) {
+    //         res.status(404).json({ message: 'Produto não encontrado!' })
+    //         return
+    //     }
 
-        const token = getToken(req)
-        const user = await getUserByToken(token)
+    //     const token = getToken(req)
+    //     const user = await getUserByToken(token)
  
-        if (product.user._id.equals(user._id)) {
-            res.status(402).json({ message: 'Você não pode reservar o seu próprio produto!' })
-            return
-        }
+    //     if (product.user._id.equals(user._id)) {
+    //         res.status(402).json({ message: 'Você não pode reservar o seu próprio produto!' })
+    //         return
+    //     }
 
-        // check if buyer already reserved the product
-        if(product.buyer) {
-            if(product.buyer._id.equals(user._id)) {
-                res.status(422).json({message: 'Você já reservou esse produto!',})
-                return
-            }
-        }
+    //     // check if buyer already reserved the product
+    //     if(product.buyer) {
+    //         if(product.buyer._id.equals(user._id)) {
+    //             res.status(422).json({message: 'Você já reservou esse produto!',})
+    //             return
+    //         }
+    //     }
 
-        // add user to product
-        product.buyer = {
-            _id: user._id,
-            name: user.name,
-            image: user.image
-        }
+    //     // add user to product
+    //     product.buyer = {
+    //         _id: user._id,
+    //         name: user.name,
+    //         image: user.image
+    //     }
 
-        await Product.findByIdAndUpdate(id, product)
+    //     await Product.findByIdAndUpdate(id, product)
 
-        res.status(200).json({message: `Produto reservado com sucesso! Entre em contato com 
-        ${product.user.name} pelo telefone ${product.user.phone}`})
-    }
+    //     res.status(200).json({message: `Produto reservado com sucesso! Entre em contato com 
+    //     ${product.user.name} pelo telefone ${product.user.phone}`})
+    // }
 
-    static async finishSold(req, res) {
-        const id = req.params.id
+    // static async finishSold(req, res) {
+    //     const id = req.params.id
 
-        // Check if exists
-        const product = await Product.findOne({ _id: id })
+    //     // Check if exists
+    //     const product = await Product.findOne({ _id: id })
 
-        if (!product) {
-            res.status(404).json({ message: 'Produto não encontrado!' })
-            return
-        }
+    //     if (!product) {
+    //         res.status(404).json({ message: 'Produto não encontrado!' })
+    //         return
+    //     }
 
-        // Check if realy is the owner od product
-        const token = getToken(req)
-        const user = await getUserByToken(token)
+    //     // Check if realy is the owner od product
+    //     const token = getToken(req)
+    //     const user = await getUserByToken(token)
  
-        if (product.user._id.toString() !== user._id.toString()) {
-            res.status(402).json({ message: 'Ocorreu um problema! Tente novamente.' })
-            return
-        }
+    //     if (product.user._id.toString() !== user._id.toString()) {
+    //         res.status(402).json({ message: 'Ocorreu um problema! Tente novamente.' })
+    //         return
+    //     }
 
-        product.available = false
+    //     product.available = false
 
-        await product.findByIdAndUpdate(id, product)
+    //     await product.findByIdAndUpdate(id, product)
 
-        res.status(201).json({message: 'Produto vendido!'})
-    }
+    //     res.status(201).json({message: 'Produto vendido!'})
+    // }
 }
